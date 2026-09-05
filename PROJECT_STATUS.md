@@ -143,7 +143,7 @@ M5 — 已冻结 M4C 审计范围，并以增量方式交付完整 P6；不代�
 
 - `uv run ruff check .`：通过。
 - `uv run ruff format --check .`：通过。
-- `uv run pytest --cov=lectureflow --cov-fail-under=87.86`：275 passed，覆盖率 87.87%。
+- `uv run pytest --cov=lectureflow --cov-fail-under=87.86`：276 passed，覆盖率 87.87%。
 - VibeASR 定向测试覆盖配置/doctor、runtime/双 GGUF 完整性、text argv/context、确定性 chunk
   边界、静音块、截断/解码失败、预检裁剪、独立 24 kHz 缓存、backend lock 和 raw 不可变。
 - M5 定向测试覆盖冻结 artifact、稳定追加 ID、绝对时间增量 transcript、可恢复 Packet、非破坏式

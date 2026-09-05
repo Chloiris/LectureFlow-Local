@@ -219,7 +219,7 @@ def _scene_frames(
             f"{duration:.6f}",
             "-vf",
             filter_value,
-            "-vsync",
+            "-fps_mode",
             "vfr",
             "-y",
             pattern,

@@ -1,16 +1,20 @@
 from __future__ import annotations
 
+from collections.abc import Sequence
 from pathlib import Path
 
+import pytest
 from PIL import Image, ImageDraw
 
 from lectureflow.config import load_config
+from lectureflow.frames import service as frame_service
 from lectureflow.frames.image import compare_images, hamming_distance, inspect_image
 from lectureflow.frames.service import (
     _cue_matches,
     _progressive_protection,
     _stratified_final_selection,
 )
+from lectureflow.process import CommandResult
 
 
 def test_image_metrics_and_dhash_are_deterministic(tmp_path: Path) -> None:
@@ -88,3 +92,39 @@ def test_final_frame_budget_is_stratified_across_five_packets() -> None:
         for left in range(0, 1500, 300)
     ]
     assert counts == [20, 20, 20, 20, 20]
+
+
+def test_scene_extraction_uses_supported_fps_mode(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    media = tmp_path / "fixture.mp4"
+    media.touch()
+    output = tmp_path / "scene"
+    captured: list[str] = []
+
+    def fake_run_command(argv: Sequence[str | Path], **_kwargs: object) -> CommandResult:
+        normalized = tuple(str(item) for item in argv)
+        captured.extend(normalized)
+        (output / "scene-000001.png").touch()
+        return CommandResult(
+            normalized,
+            0,
+            "pts_time:1.25\nlavfi.scene_score=0.5\n",
+            "",
+        )
+
+    monkeypatch.setattr(frame_service.shutil, "which", lambda _name: "/usr/bin/ffmpeg")
+    monkeypatch.setattr(frame_service, "run_command", fake_run_command)
+
+    moments = frame_service._scene_frames(
+        media,
+        output,
+        physical_start=0,
+        duration=5,
+        logical_start=10,
+        threshold=0.3,
+    )
+
+    assert "-fps_mode" in captured
+    assert "-vsync" not in captured
+    assert moments[0]["timestamp"] == 11.25
