@@ -1,0 +1,46 @@
+# Copy this file to config/local.toml. The local file is ignored by Git.
+workspace_root = "workspaces"
+
+[pipeline]
+packet_seconds = 420
+packet_overlap_seconds = 30
+
+[subtitles]
+preferred_languages = ["zh-CN", "zh-Hans", "zh", "en"]
+sources = ["uploader", "bilibili_ai", "local_file", "mlx_whisper", "faster_whisper"]
+http_timeout_seconds = 20.0
+http_retries = 2
+user_agent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 LectureFlow-Local/0.3"
+
+[asr]
+preferred_backend = "auto"
+# Configure an existing local model cache without copying it into this repository.
+model_path = ""
+# Optional Microsoft VibeVoice-ASR-BitNet backend. LectureFlow never downloads or builds it
+# automatically; point these fields at an audited local VibeASR.cpp installation.
+vibeasr_executable = "/path/to/VibeASR.cpp/build/bin/asr_infer"
+vibeasr_executable_sha256 = "" # Fill with: shasum -a 256 /path/to/asr_infer
+vibeasr_model_path = "/path/to/VibeASR.cpp/models/vibeasr"
+vibeasr_threads = 4
+vibeasr_chunk_seconds = 30.0
+vibeasr_context_size = 16384
+vibeasr_max_tokens = 4096
+vibeasr_hotwords = ["Scaling Law", "State Space Model"]
+
+[frames]
+scene_threshold = 0.32
+periodic_interval_seconds = 90
+cue_offsets_seconds = [-1.0, 0.0, 1.0]
+duplicate_threshold = 6
+black_frame_threshold = 0.97
+dark_luma_threshold = 24.0
+low_information_stddev = 6.0
+max_candidate_frames = 240
+max_final_frames = 30
+contact_sheet_columns = 4
+contact_sheet_width = 1600
+contact_sheet_max_frames = 12
+
+[web]
+host = "127.0.0.1" # Other bind addresses are rejected.
+port = 8765

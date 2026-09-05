@@ -1,0 +1,9 @@
+{
+  "font_size": 0.4,
+  "font_color": "#FFFFFF",
+  "background_alpha": 0.5,
+  "body": [
+    {"from": 0.25, "to": 2.75, "content": "  第一段  原始字幕 "},
+    {"from": 3.5, "to": 6.0, "content": "如图﹐这是公式 E = mc²"}
+  ]
+}

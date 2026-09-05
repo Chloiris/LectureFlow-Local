@@ -1,0 +1,62 @@
+schema_version = "1.0.0"
+workspace_root = "../workspaces"
+
+[pipeline]
+packet_seconds = 300
+packet_overlap_seconds = 30
+
+[frames]
+scene_threshold = 0.28
+periodic_interval_seconds = 45
+cue_offsets_seconds = [-2.0, 0.0, 2.0, 5.0]
+duplicate_threshold = 6
+progressive_slide_protection_seconds = 20.0
+local_change_ratio_threshold = 0.002
+edge_change_ratio_threshold = 0.001
+high_contrast_change_ratio_threshold = 0.0005
+max_candidate_frames = 500
+max_final_frames = 100
+contact_sheet_max_frames = 12
+subtitle_cues = [
+  "这个公式",
+  "这个式子",
+  "公式",
+  "等式",
+  "损失函数",
+  "目标函数",
+  "梯度",
+  "概率",
+  "期望",
+  "矩阵",
+  "向量",
+  "求和",
+  "等于",
+  "最小化",
+  "最大化",
+  "定义为",
+  "定义",
+  "推导",
+  "上式",
+  "下式",
+  "左边",
+  "右边",
+  "如图",
+  "看这里",
+  "代码",
+  "板书",
+]
+protected_cue_terms = [
+  "公式",
+  "式子",
+  "损失函数",
+  "目标函数",
+  "梯度",
+  "概率",
+  "期望",
+  "矩阵",
+  "向量",
+  "求和",
+  "定义",
+  "推导",
+  "代码",
+]

@@ -1,0 +1,63 @@
+schema_version = "1.0.0"
+workspace_root = "workspaces"
+
+[pipeline]
+packet_seconds = 420
+packet_overlap_seconds = 30
+codex_cli_enabled = false
+codex_cli_concurrency = 1
+codex_cli_max_retries = 1
+
+[subtitles]
+preferred_languages = ["zh-CN", "zh-Hans", "zh", "en"]
+sources = ["uploader", "bilibili_ai", "local_file", "mlx_whisper", "faster_whisper"]
+http_timeout_seconds = 20.0
+http_retries = 2
+user_agent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 LectureFlow-Local/0.3"
+
+[asr]
+preferred_backend = "auto"
+smoke_model = "small"
+production_model = "medium"
+model_path = ""
+mlx_model = "mlx-community/whisper-medium-mlx"
+mlx_revision = "7fc08c4eac4c316526498f147dfdee6f6303f975"
+
+[frames]
+scene_threshold = 0.32
+periodic_interval_seconds = 90
+cue_offsets_seconds = [-1.0, 0.0, 1.0]
+duplicate_threshold = 6
+black_frame_threshold = 0.97
+dark_luma_threshold = 24.0
+low_information_stddev = 6.0
+max_candidate_frames = 240
+max_final_frames = 30
+contact_sheet_columns = 4
+contact_sheet_width = 1600
+contact_sheet_max_frames = 12
+subtitle_cues = [
+  "看这里",
+  "如图",
+  "这个公式",
+  "这个表",
+  "这个图",
+  "代码",
+  "板书",
+  "推导",
+  "这里可以看到",
+  "注意这个",
+  "注意这里",
+  "界面上",
+  "屏幕上",
+  "接下来演示",
+  "可以看到",
+]
+
+[web]
+host = "127.0.0.1"
+port = 8765
+
+[privacy]
+allow_browser_cookie_access = false
+allow_external_model_api = false

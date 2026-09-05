@@ -1,0 +1,4 @@
+interface:
+  display_name: "LectureFlow Local"
+  short_description: "Auditable local video-course knowledge workflow"
+  default_prompt: "Use $lectureflow-local to process this course locally and verify every evidence-linked artifact."

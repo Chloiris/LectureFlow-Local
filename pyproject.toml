@@ -1,0 +1,71 @@
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[project]
+name = "lectureflow-local"
+version = "0.3.0"
+description = "Auditable, resumable local video-course to knowledge-base workflow"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "Proprietary" }
+authors = [{ name = "LectureFlow Local contributors" }]
+keywords = ["bilibili", "local-first", "obsidian", "transcription", "video"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Environment :: MacOS X",
+  "License :: Other/Proprietary License",
+  "Operating System :: MacOS :: MacOS X",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Multimedia :: Video",
+]
+dependencies = [
+  "pillow>=11,<13",
+  "pydantic>=2.10,<3",
+  "typer>=0.15,<1",
+  "yt-dlp>=2026.7.4",
+]
+
+[project.urls]
+Documentation = "https://github.com/Chloiris/LectureFlow-Local#readme"
+Issues = "https://github.com/Chloiris/LectureFlow-Local/issues"
+Repository = "https://github.com/Chloiris/LectureFlow-Local"
+
+[project.optional-dependencies]
+web = ["fastapi>=0.115,<1", "uvicorn>=0.34,<1"]
+asr-mlx = ["mlx-whisper>=0.4,<1"]
+asr-faster = ["faster-whisper>=1.1,<2"]
+
+[dependency-groups]
+dev = [
+  "pytest>=8.3,<9",
+  "pytest-cov>=6,<8",
+  "ruff>=0.9,<1",
+]
+
+[project.scripts]
+lectureflow = "lectureflow.cli:app"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/lectureflow"]
+
+[tool.pytest.ini_options]
+addopts = "-ra --strict-markers"
+testpaths = ["tests"]
+
+[tool.coverage.report]
+precision = 2
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+extend-exclude = ["workspaces"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM", "RUF"]
+ignore = ["RUF001", "RUF002"] # Chinese user-facing punctuation is intentional.
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**/*.py" = ["S101"]

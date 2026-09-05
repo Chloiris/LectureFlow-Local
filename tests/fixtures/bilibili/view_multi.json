@@ -1,0 +1,13 @@
+{
+  "code": 0,
+  "message": "0",
+  "data": {
+    "bvid": "BV1xx411c7mD",
+    "aid": 170001,
+    "pubdate": 1700000000,
+    "pages": [
+      {"cid": 1001, "page": 1, "part": "第一讲", "duration": 120},
+      {"cid": 1002, "page": 2, "part": "第二讲", "duration": 180}
+    ]
+  }
+}

@@ -1,0 +1,67 @@
+# Python environments and build products
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+dist/
+build/
+
+# Local editor and OS files
+.DS_Store
+.idea/
+.vscode/
+
+# LectureFlow runtime data (may contain private paths or course content)
+workspaces/*
+!workspaces/.gitkeep
+*.log
+logs/
+
+# Media, models, credentials, and caches
+*.mp4
+*.mov
+*.mkv
+*.webm
+*.mp3
+*.wav
+*.m4a
+*.flac
+*.safetensors
+*.gguf
+*.onnx
+*.bin
+*.pt
+*.pth
+*.ckpt
+*.npy
+*.npz
+models/
+model-cache/
+.cache/
+.tmp/
+cookies.txt
+*cookies*.txt
+*.cookie
+*.key
+*.pem
+.netrc
+credentials*.json
+secrets*.json
+.env
+.env.*
+
+# Runtime databases and indexes
+*.sqlite
+*.sqlite3
+*.sqlite-*
+*.db
+
+# User-specific configuration and exported knowledge bases
+config/local.toml
+config/user.toml
+exports/
+vault-output/
